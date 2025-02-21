@@ -1,0 +1,2 @@
+curl -o /dev/null -s -w "Tempo total: %{time_total}s\n" "https://economia.awesomeapi.com.br/json/last/USD-BRL"
+curl -w "@curl-format.txt" -o /dev/null -s "https://economia.awesomeapi.com.br/json/last/USD-BRL"
