@@ -17,7 +17,7 @@ type Response struct {
 
 func main() {
 	// Criar contexto para requisição ao servidor (timeout de 300ms)
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 300*time.Second)
 	defer cancel()
 
 	bid, err := getExchangeRate(ctx)
@@ -36,7 +36,7 @@ func main() {
 
 // Obtém a cotação do dólar do servidor
 func getExchangeRate(ctx context.Context) (string, error) {
-	req, err := http.NewRequestWithContext(ctx, "GET", "http://localhost:5001/cotacao", nil)
+	req, err := http.NewRequestWithContext(ctx, "GET", "http://localhost:8080/cotacao", nil)
 	if err != nil {
 		return "", err
 	}

@@ -68,8 +68,8 @@ func main() {
 		json.NewEncoder(w).Encode(map[string]string{"bid": rate})
 	})
 
-	log.Println("Servidor rodando na porta 5001...")
-	log.Fatal(http.ListenAndServe(":5001", nil))
+	log.Println("Servidor rodando na porta 8080...")
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
 // Obtém a cotação do dólar na API externa
