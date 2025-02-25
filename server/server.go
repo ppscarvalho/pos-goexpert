@@ -36,15 +36,8 @@ func main() {
 
 	// Configurar rota HTTP
 	http.HandleFunc("/cotacao", func(w http.ResponseWriter, r *http.Request) {
-		/*
-			Durante a implementação do server.go, foi identificado que a API https://economia.awesomeapi.com.br/json/last/USD-BRL possuía um tempo médio de resposta superior a 4 segundos, o que tornava inviável a configuração inicial do timeout em 200ms.
-			Para validar essa informação, foi realizada uma medição com o comando curl, que confirmou que o tempo de resposta da API era aproximadamente 4.3s.
-			Com isso, foi necessário ajustar o timeout da requisição HTTP no servidor para 5 segundos (5s), garantindo que a API tivesse tempo suficiente para responder sem causar falhas no sistema. Esse ajuste possibilitou que as cotações fossem obtidas corretamente e armazenadas no banco de dados, sem impactar negativamente a experiência do usuário.
-			Se no futuro a API apresentar tempos de resposta menores ou maiores, esse valor poderá ser ajustado conforme necessário.
-		*/
-
 		ctx := context.Background()
-		ctx, cancel := context.WithTimeout(ctx, 5*time.Millisecond)
+		ctx, cancel := context.WithTimeout(ctx, 200*time.Millisecond)
 		defer cancel()
 
 		rate, err := getDollarExchangeRate(ctx)
@@ -75,7 +68,7 @@ func main() {
 // Obtém a cotação do dólar na API externa
 func getDollarExchangeRate(ctx context.Context) (string, error) {
 	// Criar uma requisição HTTP com timeout maior
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second) // Timeout maior
+	ctx, cancel := context.WithTimeout(context.Background(), 200*time.Second) // Timeout maior
 	defer cancel()
 
 	req, err := http.NewRequestWithContext(ctx, "GET", "https://economia.awesomeapi.com.br/json/last/USD-BRL", nil)
