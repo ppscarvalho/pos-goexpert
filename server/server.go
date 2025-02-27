@@ -68,7 +68,7 @@ func main() {
 // Obtém a cotação do dólar na API externa
 func getDollarExchangeRate(ctx context.Context) (string, error) {
 	// Criar uma requisição HTTP com timeout maior
-	ctx, cancel := context.WithTimeout(context.Background(), 200*time.Second) // Timeout maior
+	ctx, cancel := context.WithTimeout(context.Background(), 200*time.Millisecond) // Timeout maior
 	defer cancel()
 
 	req, err := http.NewRequestWithContext(ctx, "GET", "https://economia.awesomeapi.com.br/json/last/USD-BRL", nil)
