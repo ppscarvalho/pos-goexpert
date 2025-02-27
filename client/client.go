@@ -17,7 +17,7 @@ type Response struct {
 
 func main() {
 	// Criar contexto para requisição ao servidor (timeout de 300ms)
-	ctx, cancel := context.WithTimeout(context.Background(), 300*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 300*time.Millisecond)
 	defer cancel()
 
 	bid, err := getExchangeRate(ctx)
